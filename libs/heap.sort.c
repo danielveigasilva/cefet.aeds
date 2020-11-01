@@ -2,7 +2,7 @@
 #include "helper.h"
 #include "heap.h"
 
-void __down_heap__(int *Vector, int i, int n){
+void DeceHeap(int *Vector, int i, int n){
   int parent = Vector[i];
   int j = 0;
   while(i <= (int)n/2){
@@ -19,29 +19,30 @@ void __down_heap__(int *Vector, int i, int n){
   Vector[i] = parent;
 }
 
-void __up_heap__(int *Vector, int i){
-  int parent = Vector[i];
-  Vector[0] = parent;
-  while (Vector[(int)i/2] < parent)
+void SobeHeap(int *Vector, int i){
+  int item = Vector[i];
+  int j = (int)(i-1)/2;
+  Vector[0] = item;
+  while (Vector[(int)(i-1)/2] < item)
   {
-    SwapPosition(Vector, i, (int)i/2);
-    i = (int)i/2;
+    SwapPosition(Vector, i, (int)(i-1)/2);
+    i = (int)(i-1)/2;
   }
-  Vector[i] = parent;
+  Vector[i] = item;
 }
 
-void __build_heap__(int *Vector, int n)
+void BuildHeap(int *Vector, int n)
 {
   for (int i = (n / 2); i >= 0 ; i--)
-    __down_heap__(Vector, i, n-1);
+    DeceHeap(Vector, i, n-1);
 }
 
 void HeapSort(int *Vector, int n){
     
-    __build_heap__(Vector, n);
+    BuildHeap(Vector, n);
 
     for (int i = n - 1; i >= 1; i--){
       SwapPosition(Vector, 0, i);
-      __down_heap__(Vector, 0, i - 1);
+      DeceHeap(Vector, 0, i - 1);
     }
 }

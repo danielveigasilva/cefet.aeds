@@ -5,12 +5,8 @@
 
 void SortAndPrint(int *vector, int n, char *algorithm){
 
-	int newVector[n];
-	for(int i = 0; i < n; i++)
-		newVector[i] = vector[i];
-
-	printf("%s (%s):\n", algorithm, Heap(newVector, n, algorithm));
-	printv(newVector, n);
+	printf("%s (%s):\n", algorithm, Heap(vector, n, algorithm));
+	printv(vector, n);
 	printf("\n\n");
 }
 
@@ -53,6 +49,23 @@ int main()
 	printf("\n\n\n");
 
 	SortAndPrint(vector, size, "HeapSort");
+
+	printf("\n\n");
+	printf("Digite um valor para inserir no Heap: ");
+		
+	int newVector[size+1];
+	
+	for (int i = 0; i < size+1; i++){
+		if (i < size)
+			newVector[i] = vector[i];
+		else
+			scanf("%d", &newVector[i]);
+	}
+	
+	printf("\n\nHeap Resultante:\n");
+	HeapSort(newVector, size+1);
+	printv(newVector, size+1);
+	printf("\n");
 
     return 0;
 }
